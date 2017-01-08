@@ -10,16 +10,25 @@ router.get('/', function(req, res, next) {
 });
 
 function createTerminalCommand(option) {
-  var cmd = 'gnome-terminal --geometry=80x24+'+option.x+'+'+option.y;
+  var cmd = '';
+  if (option) {
+    cmd = 'gnome-terminal --geometry=80x24+'+option.x+'+'+option.y;
+  } else {
+    cmd = 'gnome-terminal --geometry=80x24+100+100';
+  }
   console.log(info('terminal cmd: ' + cmd));
   return cmd;
 }
 
 router.get('/terminal', function(req, res, next) {
     console.log(info('query: '+ JSON.stringify(req.query.option, null, 2)));
-    var optionString = decodeURIComponent(req.query.option);
-    var optionJson = JSON.parse(optionString);
-    cp.exec(createTerminalCommand(optionJson));
+    if(req.query.option) {
+      var optionString = decodeURIComponent(req.query.option);
+      var optionJson = JSON.parse(optionString);
+      cp.exec(createTerminalCommand(optionJson));
+    } else {
+      cp.exec(createTerminalCommand(null));
+    }
     res.writeHead(200);
     res.end();
 });
