@@ -1,5 +1,12 @@
 function installTerminalCmd() {
-  var $terminalCmd = $('#terminalCmd');
+  var $terminalCmd = $('.terminalCmd');
+  _.each($terminalCmd, function (target) {
+    addTerminalCmd(target);
+  })
+}
+
+function addTerminalCmd(target) {
+  var $terminalCmd = $(target);
   $terminalCmd.click(function (event) {
     if (event) {
       var rect = $terminalCmd.position();
@@ -34,19 +41,28 @@ function installTerminalCmd() {
   });
 }
 
-function installVimCmd() {
-  var $vimCmd = $('#vimCmd');
+function addVimCmd(target) {
+  var $vimCmd = $(target);
   var filename = $vimCmd.attr("data-filename");
   $vimCmd.click(function (event) {
-    $.ajax({
-      type: "get",
-      dataType: "json",
-      url: "http://localhost:3000/apis/vim?filename=" + filename,
-      cache: false,
-      success: function (data) { },
-      error: function (xhr, status, err) { }
-    });
+    if (filename) {
+      $.ajax({
+        type: "get",
+        dataType: "json",
+        url: "http://localhost:3000/apis/vim?filename=" + filename,
+        cache: false,
+        success: function (data) { },
+        error: function (xhr, status, err) { }
+      });
+    }
   });
+}
+
+function installVimCmd() {
+  var $vimCmd = $('.vimCmd');
+  _.each($vimCmd, function (target) {
+    addVimCmd(target);
+  })
 }
 
 function installCmd() {
