@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "build": "webpack"
+    "build": "./node_modules/.bin/webpack",
+    "clean": "rm -rf ./node_modules; rm public/javascripts/bundle.js"
   },
   "dependencies": {
     "body-parser": "~1.15.1",
@@ -17,8 +18,9 @@
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
+    "@babel/core": "^7.2.2",
+    "babel-loader": "^8.0.4",
+    "babel-preset-env": "^1.7.0",
     "webpack": "^4.28.2",
     "webpack-cli": "^3.1.2"
   }
