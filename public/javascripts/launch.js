@@ -1,3 +1,4 @@
+import _ from 'lodash';
 function installTerminalCmd() {
   var $terminalCmd = $('.terminalCmd');
   _.each($terminalCmd, function (target) {
