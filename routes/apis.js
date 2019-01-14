@@ -11,6 +11,7 @@ router.get('/', function(req, res, next) {
 });
 
 function getTerminalCmd(option) {
+  option = option || {};
   option.x = option.x || 0;
   option.y = option.y || 0;
   const cmd = 'gnome-terminal --geometry=80x24+'+option.x+'+'+option.y;
@@ -24,10 +25,12 @@ function getVimCmd(filename) {
 
 router.get('/terminal', function(req, res, next) {
   console.log(info('query: '+ JSON.stringify(req.query.option, null, 2)));
-  if(req.query.option) {
+  if(req.query !== undefined && req.query.option) {
     const optionString = decodeURIComponent(req.query.option);
     const optionJson = JSON.parse(optionString);
     cp.exec(getTerminalCmd(optionJson));
+  } else {
+    cp.exec(getTerminalCmd({}));
   }
   res.writeHead(200);
   res.end();

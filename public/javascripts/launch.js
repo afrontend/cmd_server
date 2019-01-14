@@ -9,10 +9,10 @@ function installTerminalCmd() {
 function addTerminalCmd(target) {
   var $terminalCmd = $(target);
   var $img = $terminalCmd.find('img');
+  var rect = $img.position();
   $terminalCmd.click(function (event) {
-    if (event) {
-      var rect = $img.position();
-      console.log('rect: ' + JSON.stringify(rect, null, 2));
+    if (event && rect !== undefined) {
+      console.log('rect: ' + rect);
       var diffX = event.screenX - event.clientX;
       var diffY = event.screenY - event.clientY;
       var alpha = 5;
