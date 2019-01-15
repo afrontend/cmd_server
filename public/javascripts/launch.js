@@ -25,7 +25,7 @@ function addTerminalCmd(target) {
       $.ajax({
         type: "get",
         dataType: "json",
-        url: "http://localhost:3000/apis/terminal?option=" + optionString,
+        url: "http://localhost:4566/apis/terminal?option=" + optionString,
         cache: false,
         success: function (data) { },
         error: function (xhr, status, err) { }
@@ -34,7 +34,7 @@ function addTerminalCmd(target) {
       $.ajax({
         type: "get",
         dataType: "json",
-        url: "http://localhost:3000/apis/terminal",
+        url: "http://localhost:4566/apis/terminal",
         cache: false,
         success: function (data) { },
         error: function (xhr, status, err) { }
@@ -51,7 +51,7 @@ function addVimCmd(target) {
       $.ajax({
         type: "get",
         dataType: "json",
-        url: "http://localhost:3000/apis/vim?filename=" + filename,
+        url: "http://localhost:4566/apis/vim?filename=" + filename,
         cache: false,
         success: function (data) { },
         error: function (xhr, status, err) { }
