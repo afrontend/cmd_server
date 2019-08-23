@@ -14,30 +14,24 @@ function getTerminalCmd(option) {
   option = option || {};
   option.x = option.x || 0;
   option.y = option.y || 0;
-  const cmd = 'gnome-terminal --geometry=80x24+'+option.x+'+'+option.y;
-  return cmd;
+  return 'gnome-terminal --geometry=80x24+'+option.x+'+'+option.y;
 }
 
 function getVimCmd(filename) {
-  const cmd = 'terminator -e "vim '+filename+'"';
-  return cmd;
+  return 'terminator -e "vim '+filename+'"';
+}
+
+function getTerminalOption(query) {
+  return (query !== undefined && query.option) ? JSON.parse(decodeURIComponent(query.option)) : null;
 }
 
 router.get('/terminal', function(req, res, next) {
-  console.log(info('query: '+ JSON.stringify(req.query.option, null, 2)));
-  if(req.query !== undefined && req.query.option) {
-    const optionString = decodeURIComponent(req.query.option);
-    const optionJson = JSON.parse(optionString);
-    cp.exec(getTerminalCmd(optionJson));
-  } else {
-    cp.exec(getTerminalCmd({}));
-  }
+  cp.exec(getTerminalCmd(getTerminalOption(req.query)));
   res.writeHead(200);
   res.end();
 });
 
 router.get('/vim', function(req, res, next) {
-  console.log(info('query: '+ JSON.stringify(req.query, null, 2)));
   const filename = req.query.filename;
   fs.exists(filename, function () {
     cp.exec(getVimCmd(filename));
