@@ -1,13 +1,13 @@
 {
   "name": "cmd_server",
   "engines": {
-    "node": ">=16.17.0"
+    "node": ">=16.0.0"
   },
   "version": "0.0.2",
   "description": "프로그램 실행하는 웹 서비스",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "dev": "npm run build && node ./bin/www",
     "build": "./node_modules/.bin/webpack",
     "clean": "rm -rf ./node_modules; rm public/javascripts/bundle.js"
   },
