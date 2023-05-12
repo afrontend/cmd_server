@@ -18,7 +18,7 @@ function getTerminalCmd(option) {
 }
 
 function getVimCmd(filename) {
-  return 'terminator -e "vim '+filename+'"';
+  return `gnome-terminal -- vim ${filename}`
 }
 
 function getTerminalOption(query) {
